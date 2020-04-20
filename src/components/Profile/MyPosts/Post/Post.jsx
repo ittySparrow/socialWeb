@@ -1,7 +1,7 @@
 import React from 'react';
-import p from './Post.module.css'
+import style from './Post.module.css'
 
-function Post() {
+const Post = (props) => {
     return (
         <div className='post'>
             post1

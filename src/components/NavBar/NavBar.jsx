@@ -1,23 +1,23 @@
 import React from 'react';
-import b from './NavBar.module.css';
+import style from './NavBar.module.css';
 
-function NavBar() {
+const NavBar = (props) => {
     return (
-        <nav className={b.navbar}>
+        <nav className={style.navbar}>
             <div>
-                <a>Profile</a>
+                <a href="/profile">Profile</a>
             </div>
             <div>
-                <a>Messages</a>
+                <a href="/dialogs">Messages</a>
             </div>
             <div>
-                <a>News</a>
+                <a href="/news">News</a>
             </div>
             <div>
-                <a>Music</a>
+                <a href="/music">Music</a>
             </div>
             <div>
-                <a>Settings</a>
+                <a href="/settings">Settings</a>
             </div>
         </nav>
     );
