@@ -1,10 +1,11 @@
 import React from 'react';
 import style from './Header.module.css';
+import Logo from './logo.png';
 
 const Header = (props) => {
   return (
     <header className={style.header}>
-        <img src='http://video.netgez.com/video/images/thumbs/videolar/2014-06-03/1/logo-tasarim-photoshop-egitimi_1_15592.jpg'></img>
+        <img src={Logo}></img>
     </header>
   );
 }

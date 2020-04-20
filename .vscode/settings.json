@@ -1,3 +1,0 @@
-{
-    "autoimport.filesToScan": "**/*.{ts,tsx} */.{jsx, js} **/*.{jsx, js}"
-}

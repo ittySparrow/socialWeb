@@ -1,4 +1,15 @@
 .navbar {
     grid-area: n;
-    background-color: rgb(107, 114, 78);
+    background-color: white;
+    padding: 20px;
   }
+
+.item a {
+  color: #1B1C1C;
+  text-decoration: none;
+}
+
+.item .active {
+  color: #4EA374;
+  text-decoration: none;
+}
