@@ -11,9 +11,32 @@
     color: #4EA374;
 }
 
+.avatar {
+    height: 50px;
+    width: 50px;
+    align-self: center;
+    margin-right: 10px;
+}
+
 .messages {
     padding: 20px;
 
+}
+
+.dialog {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+.dialogItem {
+    color: #1B1C1C;
+    text-decoration: none;
+}
+
+.dialog .active {
+    color: #4EA374;
+    text-decoration: none;
 }
 
 .message {
