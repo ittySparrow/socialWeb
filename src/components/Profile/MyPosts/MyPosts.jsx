@@ -1,17 +1,20 @@
 import React from 'react';
 import style from './MyPosts.module.css'
 import Post from './Post/Post';
+import {addPostActionHandler, handlePostChangeActionHandler} from "../../../redux/profileReducer";
 
 const MyPosts = (props) => {
 
     const postsElements = props.state.postsData
         .map(({ post, likesCount }) => <Post message={post} likesCount={ likesCount }/>);
 
-    const newPostElement = React.createRef();
+    const addPost = () => {
+        props.dispatch(addPostActionHandler());
+    }
 
-    const handleChange = () => {
-        debugger;
-        props.handlePostChange(newPostElement.current.value);
+    const handleChange = (e) => {
+        const { value } = e.target;
+        props.dispatch(handlePostChangeActionHandler(value));
     }
 
     return (
@@ -19,10 +22,10 @@ const MyPosts = (props) => {
             <h3>My posts</h3>
             <div>
                 <div>
-                    <textarea ref={newPostElement} value={props.newPostText} onChange={handleChange} />
+                    <textarea value={props.state.newPostText} onChange={handleChange} />
                 </div>
                 <div>
-                    <button onClick={props.addPost}>Add post</button>
+                    <button onClick={addPost}>Add post</button>
                 </div>
             </div>
             <div className={style.posts}>
