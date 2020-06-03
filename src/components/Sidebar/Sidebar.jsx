@@ -1,13 +1,22 @@
 import React from "react";
 import FriendList from "./FriendList/FriendList";
 import style from "./SideBar.module.css"
+import StoreContext from "../../StoreContext";
 
-const Sidebar = (props) => {
+const Sidebar = () => {
     return (
-        <div className={style.sidebar}>
-            <FriendList state={props.state}/>
-        </div>
+        <StoreContext.Consumer>{
+            (store) => {
+                const state = store.getState();
+                return (
+                <div className={style.sidebar}>
+                    <FriendList friendList={state.sidebar.friendList}/>
+                </div>
+            )}
+        }</StoreContext.Consumer>
     )
+    
+    
 }
 
 export default Sidebar;
