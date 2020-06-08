@@ -2,7 +2,6 @@ const ADD_NEW_MESSAGE = 'ADD-NEW-MESSAGE';
 const HANDLE_MESSAGE_CHANGE = 'HANDLE-MESSAGE-CHANGE';
 
 export const addNewMessageActionHandler = () => ({ type: ADD_NEW_MESSAGE });
-
 export const handleMessageChangeActionHandler = (text) => ({
     type: HANDLE_MESSAGE_CHANGE,
     value: text,
