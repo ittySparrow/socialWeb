@@ -5,11 +5,7 @@ export const toggleFollowAC = (userId) => ({ type: TOGGLE_FOLLOW, userId }); //A
 export const setUsersAC = (users) => ({ type: SET_USERS, users });
 
 const initialState = {
-    users: [
-        // {id: 1, followed: false, fullName: 'Aleks Read', status: "Hello, this is my first post", location: {city: Minsk,country: Belarus}},
-        // {id: 2, followed: true, fullName: 'Maria Stans', status: "I'm a boss", location: {city: Moscow, country: Russia}},
-        // {id: 3, followed: true, fullName: 'Xert Dit', status: "Hello", location: {city: N, country: USA}},
-    ],
+    users: [],
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -23,7 +19,7 @@ const usersReducer = (state = initialState, action) => {
             return {
                 ...state,
                 users: [ ...state.users, ...action.users ]
-            }
+            };
         default:
             return state;
     }
