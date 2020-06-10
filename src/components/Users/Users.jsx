@@ -5,7 +5,7 @@ import styles from './Users.module.css';
 const Users = (props) => {
     const pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
     const pages = [];
-    for (let i = 1; i <= pagesCount; i += 1) {
+    for (let i = 1; i <= 10; i += 1) {
         pages.push(i);
     }
 
