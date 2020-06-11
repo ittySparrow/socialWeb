@@ -1,6 +1,7 @@
 import React from 'react';
 import avaDefault from "../../assets/images/avaDefault.jpg";
 import styles from './Users.module.css';
+import { NavLink } from 'react-router-dom';
 
 const Users = (props) => {
     const pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
@@ -27,7 +28,10 @@ const Users = (props) => {
                         </span>
                         <span>
                             <span>
-                                <div>{u.name}</div><div>{u.status}</div>
+                                <NavLink to={`/profile/${u.id}`}>
+                                    <div>{u.name}</div>
+                                </NavLink>
+                                <div>{u.status}</div>
                             </span>
                             <span>
                                 <div>{"u.location.city"}</div><div>{"u.location.country"}</div>

@@ -1,11 +1,15 @@
 import React from 'react';
 import style from './ProfileInfo.module.css'
-import Ava from './avaExample.png'
+import Preloader from '../../common/Preloader';
 
-const ProfileInfo = () => {
+const ProfileInfo = (props) => {
+    if (!props.profile) {
+        return <Preloader />
+    }
+    
     return (
         <div>
-            <img src={Ava}></img>
+            <img src={props.profile.photos.large}></img>
             <div>
                 ava+description
             </div>

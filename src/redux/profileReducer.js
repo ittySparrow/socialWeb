@@ -1,12 +1,10 @@
-const ADD_POST = 'ADD-POST';
-const HANDLE_POST_CHANGE = 'HANDLE-POST-CHANGE';
+const ADD_POST = 'ADD_POST';
+const HANDLE_POST_CHANGE = 'HANDLE_POST_CHANGE';
+const SET_USER_PROFILE = 'SET_USER_PROFILE';
 
 export const addPost = () => ({ type: ADD_POST });
-
-export const handlePostChange = (text) => ({
-    type: HANDLE_POST_CHANGE,
-    value: text,
-});
+export const handlePostChange = (text) => ({ type: HANDLE_POST_CHANGE, text });
+export const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile });
 
 const initialState = {
     postsData: [
@@ -14,6 +12,7 @@ const initialState = {
         {id: 2, post: "Is anybody here?", likesCount: 9},
     ],
     newPostText: '',
+    profile: null,
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -32,7 +31,13 @@ const profileReducer = (state = initialState, action) => {
         case HANDLE_POST_CHANGE:
             return {
                 ...state,
-                newPostText: action.value,
+                newPostText: action.text,
+            };
+        case SET_USER_PROFILE:
+            return {
+                ...state,
+                profile: action.profile,
+
             };
         default:
             return state;
