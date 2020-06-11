@@ -1,9 +1,9 @@
 const ADD_POST = 'ADD-POST';
 const HANDLE_POST_CHANGE = 'HANDLE-POST-CHANGE';
 
-export const addPostActionHandler = () => ({ type: ADD_POST });
+export const addPost = () => ({ type: ADD_POST });
 
-export const handlePostChangeActionHandler = (text) => ({
+export const handlePostChange = (text) => ({
     type: HANDLE_POST_CHANGE,
     value: text,
 });

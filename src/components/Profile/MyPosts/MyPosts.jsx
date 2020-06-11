@@ -9,7 +9,7 @@ const MyPosts = (props) => {
 
     const handleChange = (e) => {
         const { value } = e.target;
-        props.onChange(value);
+        props.handlePostChange(value);
     }
 
     return (

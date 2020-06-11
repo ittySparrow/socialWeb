@@ -4,11 +4,11 @@ const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT';
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
 
-export const toggleFollowAC = (userId) => ({ type: TOGGLE_FOLLOW, userId }); //AC === Action Creator
-export const setUsersAC = (users) => ({ type: SET_USERS, users });
-export const setCurrentPageAC = (page) => ({ type: SET_CURRENT_PAGE, page });
-export const setTotalUsersCountAC = (totalUsersCount) => ({ type: SET_TOTAL_USERS_COUNT, totalUsersCount });
-export const toggleIsFetchingAC = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isFetching });
+export const toggleFollow = (userId) => ({ type: TOGGLE_FOLLOW, userId }); //AC === Action Creator
+export const setUsers = (users) => ({ type: SET_USERS, users });
+export const setCurrentPage = (page) => ({ type: SET_CURRENT_PAGE, page });
+export const setTotalUsersCount = (totalUsersCount) => ({ type: SET_TOTAL_USERS_COUNT, totalUsersCount });
+export const toggleIsFetching = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isFetching });
 
 const initialState = {
     users: [],
