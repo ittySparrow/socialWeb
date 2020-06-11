@@ -2,10 +2,7 @@ const ADD_NEW_MESSAGE = 'ADD-NEW-MESSAGE';
 const HANDLE_MESSAGE_CHANGE = 'HANDLE-MESSAGE-CHANGE';
 
 export const addNewMessage = () => ({ type: ADD_NEW_MESSAGE });
-export const handleMessageChange = (text) => ({
-    type: HANDLE_MESSAGE_CHANGE,
-    value: text,
-});
+export const handleMessageChange = (text) => ({ type: HANDLE_MESSAGE_CHANGE, text });
 
 const initialState = {
     dialogsData: [
@@ -38,7 +35,7 @@ const dialogsReducer = (state = initialState, action) => {
         case HANDLE_MESSAGE_CHANGE: 
             return { 
                 ...state,
-                newMessageText: action.value,
+                newMessageText: action.text,
             }
         default:
             return state;
