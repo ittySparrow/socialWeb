@@ -2,7 +2,7 @@ import React from 'react';
 import avaDefault from "../../assets/images/avaDefault.jpg";
 import styles from './Users.module.css';
 import { NavLink } from 'react-router-dom';
-import * as axios from 'axios';
+import { followAPI } from '../../api/API';
 
 const Users = (props) => {
     // const pagesCount = Math.ceil(props.totalUsersCount / props.pageSize); - TOO LONG LIST
@@ -12,30 +12,16 @@ const Users = (props) => {
     }
 
     const followUser = (userId) => {
-        axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`, null, { 
-            withCredentials: true,
-            headers: {
-                "API-KEY": "3a3c4494-211d-45d0-8327-6662b7db7236",
-            }
-        })
-            .then(({ data }) => {
-                debugger;
-            if (data.resultCode === 0) {
+        followAPI.follow(userId).then((resultCode) => {
+            if (resultCode === 0) {
                 props.toggleFollow(userId); 
             }
         });
     }
 
     const unfollowUser = (userId) => {
-        axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`, { 
-            withCredentials: true,
-            headers: {
-                "API-KEY": "3a3c4494-211d-45d0-8327-6662b7db7236",
-            }
-        })
-            .then(({ data }) => {
-                debugger;
-            if (data.resultCode === 0) {
+        followAPI.follow(userId).then((resultCode) => {
+            if (resultCode === 0) {
                 props.toggleFollow(userId);
             }
         });

@@ -2,17 +2,17 @@ import React from 'react';
 import Profile from './Profile';
 import { connect } from 'react-redux';
 import { setUserProfile } from '../../redux/profileReducer'
-import * as axios from 'axios';
 import { withRouter } from 'react-router-dom';
+import { profileAPI } from '../../api/API';
 
 class ProfileContainer extends React.Component {
 
     componentDidMount() {
         const userId = this.props.match.params.userId;
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId || '2'}`)
-        .then(({ data }) => {
-            this.props.setUserProfile(data);
-        });   
+        profileAPI.getUserProfile(userId)
+            .then((data) => {
+                this.props.setUserProfile(data);
+            });
     }
 
     render() {
