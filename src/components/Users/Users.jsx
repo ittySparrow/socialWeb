@@ -12,17 +12,21 @@ const Users = (props) => {
     }
 
     const followUser = (userId) => {
+        props.toggleFollowingInProgress(true, userId);
         followAPI.follow(userId).then((resultCode) => {
             if (resultCode === 0) {
                 props.toggleFollow(userId); 
+                props.toggleFollowingInProgress(false, userId);
             }
         });
     }
 
     const unfollowUser = (userId) => {
-        followAPI.follow(userId).then((resultCode) => {
+        props.toggleFollowingInProgress(true, userId);
+        followAPI.unfollow(userId).then((resultCode) => {
             if (resultCode === 0) {
                 props.toggleFollow(userId);
+                props.toggleFollowingInProgress(false, userId);
             }
         });
     }
@@ -40,7 +44,7 @@ const Users = (props) => {
                                 <img src={u.photos.small ? u.photos.small : avaDefault } className={styles.photo}/>
                             </div>
                             <div>
-                                <button onClick={() => u.followed ? unfollowUser(u.id) : followUser(u.id)}>
+                                <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => u.followed ? unfollowUser(u.id) : followUser(u.id)}>
                                     {u.followed ? 'Unfollow' : 'Follow'}
                                 </button>
                             </div>
