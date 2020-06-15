@@ -1,18 +1,12 @@
 import React from 'react';
 import Header from './Header';
 import { connect } from 'react-redux';
-import { setAuthUserData } from '../../redux/AuthReducer';
-import { authAPI } from '../../api/API';
+import { getAuthUserData } from '../../redux/AuthReducer';
 
 class HeaderContainer extends React.Component {
 
   componentDidMount() {
-    authAPI.getUserData().then((data) => {
-      if (data.resultCode === 0) {
-        const { id, login, email } = data.data;
-        this.props.setAuthUserData(id, login, email);
-      }
-    });
+    this.props.getAuthUserData();
   }
   
   render() {
@@ -27,4 +21,4 @@ const mapStateToProps = (state) => {
   }
 };
 
-export default connect(mapStateToProps, { setAuthUserData })(HeaderContainer);
+export default connect(mapStateToProps, { getAuthUserData })(HeaderContainer);

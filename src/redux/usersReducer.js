@@ -1,3 +1,5 @@
+import { usersAPI, followAPI } from "../api/API";
+
 const TOGGLE_FOLLOW = 'TOGGLE_FOLLOW';
 const SET_USERS = 'SET_USERS';
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
@@ -5,7 +7,7 @@ const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT';
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
 const TOGGLE_FOLLOWING_IN_PROGRESS = 'TOGGLE_FOLLOWING_IN_PROGRESS';
 
-export const toggleFollow = (userId) => ({ type: TOGGLE_FOLLOW, userId }); //AC === Action Creator
+export const toggleFollow = (userId) => ({ type: TOGGLE_FOLLOW, userId });
 export const setUsers = (users) => ({ type: SET_USERS, users });
 export const setCurrentPage = (page) => ({ type: SET_CURRENT_PAGE, page });
 export const setTotalUsersCount = (totalUsersCount) => ({ type: SET_TOTAL_USERS_COUNT, totalUsersCount });
@@ -15,6 +17,38 @@ export const toggleFollowingInProgress = (isFetching, userId) => ({
     isFetching,
     userId,
 });
+export const getUsers = (currentPage, pageSize) => {
+    return (dispatch) => {
+        dispatch(toggleIsFetching(true));
+        usersAPI.getUsers(currentPage, pageSize).then((data) => {
+            dispatch(toggleIsFetching(false));
+            dispatch(setUsers(data.items));
+            dispatch(setTotalUsersCount(data.totalCount));
+        });   
+    };
+}
+export const followUser = (userId) => {
+    return (dispatch) => {
+        dispatch(toggleFollowingInProgress(true, userId))
+        followAPI.follow(userId).then((resultCode) => {
+            if (resultCode === 0) {
+                dispatch(toggleFollow(userId)); 
+                dispatch(toggleFollowingInProgress(false, userId));
+            }
+        });   
+    };
+}
+export const unfollowUser = (userId) => {
+    return (dispatch) => {
+        dispatch(toggleFollowingInProgress(true, userId))
+        followAPI.unfollow(userId).then((resultCode) => {
+            if (resultCode === 0) {
+                dispatch(toggleFollow(userId));
+                dispatch(toggleFollowingInProgress(false, userId));
+            }
+        });
+    };
+}
 
 const initialState = {
     users: [],

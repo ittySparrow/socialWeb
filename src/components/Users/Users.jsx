@@ -2,33 +2,12 @@ import React from 'react';
 import avaDefault from "../../assets/images/avaDefault.jpg";
 import styles from './Users.module.css';
 import { NavLink } from 'react-router-dom';
-import { followAPI } from '../../api/API';
 
 const Users = (props) => {
     // const pagesCount = Math.ceil(props.totalUsersCount / props.pageSize); - TOO LONG LIST
     const pages = [];
     for (let i = 1; i <= 10; i += 1) {
         pages.push(i);
-    }
-
-    const followUser = (userId) => {
-        props.toggleFollowingInProgress(true, userId);
-        followAPI.follow(userId).then((resultCode) => {
-            if (resultCode === 0) {
-                props.toggleFollow(userId); 
-                props.toggleFollowingInProgress(false, userId);
-            }
-        });
-    }
-
-    const unfollowUser = (userId) => {
-        props.toggleFollowingInProgress(true, userId);
-        followAPI.unfollow(userId).then((resultCode) => {
-            if (resultCode === 0) {
-                props.toggleFollow(userId);
-                props.toggleFollowingInProgress(false, userId);
-            }
-        });
     }
 
     return (<div>
@@ -44,7 +23,7 @@ const Users = (props) => {
                                 <img src={u.photos.small ? u.photos.small : avaDefault } className={styles.photo}/>
                             </div>
                             <div>
-                                <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => u.followed ? unfollowUser(u.id) : followUser(u.id)}>
+                                <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => u.followed ? props.unfollowUser(u.id) : props.followUser(u.id)}>
                                     {u.followed ? 'Unfollow' : 'Follow'}
                                 </button>
                             </div>

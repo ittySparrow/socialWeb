@@ -1,3 +1,5 @@
+import { profileAPI } from "../api/API";
+
 const ADD_POST = 'ADD_POST';
 const HANDLE_POST_CHANGE = 'HANDLE_POST_CHANGE';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
@@ -5,6 +7,14 @@ const SET_USER_PROFILE = 'SET_USER_PROFILE';
 export const addPost = () => ({ type: ADD_POST });
 export const handlePostChange = (text) => ({ type: HANDLE_POST_CHANGE, text });
 export const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile });
+export const setProfile = (userId) => {
+    return (dispatch) => {
+        profileAPI.getUserProfile(userId)
+            .then((data) => {
+                dispatch(setUserProfile(data));
+            });
+    };
+}
 
 const initialState = {
     postsData: [
