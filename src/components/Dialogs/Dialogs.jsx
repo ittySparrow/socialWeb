@@ -2,13 +2,8 @@ import React from 'react';
 import style from './Dialogs.module.css'
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import { Redirect } from 'react-router-dom';
 
 export default (props) => {
-
-    if (!props.isAuth) { 
-        return <Redirect to={'/login'} /> 
-    }
 
     const onChangeMessage = (e) => {
         const text = e.target.value;
