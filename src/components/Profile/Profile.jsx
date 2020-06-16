@@ -1,8 +1,13 @@
 import React from 'react';
 import ProfileInfo from './ProfileInfo/ProfileInfo'
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
+import { Redirect } from 'react-router-dom';
 
-const Profile = (props) => {
+export default (props) => {
+
+    if (!props.isAuth) {
+        return <Redirect to={'login'} />
+    }
 
     return (
         <div>
@@ -11,5 +16,3 @@ const Profile = (props) => {
         </div>
     );
 }
-
-export default Profile;
