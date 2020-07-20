@@ -5,10 +5,13 @@ import {
   composeValidators,
   requieredField,
 } from "../../utils/validators/validators";
+import { connect } from "react-redux";
+import { login } from "../../redux/authReducer";
+import { Redirect } from "react-router-dom";
 
 const LoginForm = (props) => {
-  const onSubmit = (formData) => {
-    console.log(formData);
+  const onSubmit = ({ email, password, rememberMe }) => {
+    props.login(email, password, rememberMe);
   };
 
   return (
@@ -19,8 +22,8 @@ const LoginForm = (props) => {
           <div>
             <Field
               component={Input}
-              name="login"
-              placeholder="Login"
+              name="email"
+              placeholder="Email"
               validate={composeValidators(requieredField)}
             />
           </div>
@@ -28,6 +31,7 @@ const LoginForm = (props) => {
             <Field
               component={Input}
               name="password"
+              type="password"
               placeholder="Password"
               validate={composeValidators(requieredField)}
             />
@@ -45,11 +49,21 @@ const LoginForm = (props) => {
   );
 };
 
-export default () => {
+const Login = (props) => {
+  if (props.isAuth) {
+    return <Redirect to={"/profile"} />;
+  }
+
   return (
     <div>
       <h1>LOGIN</h1>
-      <LoginForm />
+      <LoginForm {...props} />
     </div>
   );
 };
+
+const mapStateToProps = (state) => ({
+  isAuth: state.auth.isAuth,
+});
+
+export default connect(mapStateToProps, { login })(Login);
