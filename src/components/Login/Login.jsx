@@ -17,7 +17,7 @@ const LoginForm = (props) => {
   return (
     <Form
       onSubmit={onSubmit}
-      render={({ handleSubmit }) => (
+      render={({ submitError, handleSubmit }) => (
         <form onSubmit={handleSubmit}>
           <div>
             <Field
@@ -36,6 +36,7 @@ const LoginForm = (props) => {
               validate={composeValidators(requieredField)}
             />
           </div>
+          {submitError && <div>{submitError}</div>}
           <div>
             <Field component={Input} name="rememberMe" type="checkbox" />
             remember me

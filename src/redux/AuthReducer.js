@@ -2,9 +2,9 @@ import { authAPI } from "../api/API";
 
 const SET_AUTH_USER_DATA = "SET_AUTH_USER_DATA";
 
-export const setAuthUserData = (userId, login, email, isAuth) => ({
+export const setAuthUserData = (id, login, email, isAuth) => ({
   type: SET_AUTH_USER_DATA,
-  payload: { userId, login, email, isAuth },
+  payload: { id, login, email, isAuth },
 });
 export const getAuthUserData = () => {
   return (dispatch) => {
