@@ -2,13 +2,13 @@ import React from "react";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 
-export default (props) => {
+export default ({ profile, status, updateStatus }) => {
   return (
     <div>
       <ProfileInfo
-        profile={props.profile}
-        status={props.status}
-        updateStatus={props.updateStatus}
+        profile={profile}
+        status={status}
+        updateStatus={updateStatus}
       />
       <MyPostsContainer />
     </div>

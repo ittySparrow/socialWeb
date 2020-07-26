@@ -1,10 +1,6 @@
 .photo {
-    width: 85px;
-    height: 85px;
-    border: black 1.5px solid;
-    border-radius: 50%;
-}
-
-.selectedPage {
-    font-weight: bold;
+  width: 85px;
+  height: 85px;
+  border: black 1.5px solid;
+  border-radius: 50%;
 }

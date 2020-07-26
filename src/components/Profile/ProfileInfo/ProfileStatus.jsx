@@ -6,11 +6,9 @@ export default class ProfileStatus extends React.Component {
     editMode: false,
     status: this.props.state,
   };
-
   activateEditMode = () => {
     this.setState({ editMode: true });
   };
-
   deactivateEditMode = () => {
     this.setState({ editMode: false });
     this.props.updateStatus(this.state.status);
@@ -20,8 +18,7 @@ export default class ProfileStatus extends React.Component {
       status: e.target.value,
     });
   };
-
-  componentDidUpdate(prevPorps, prevState) {
+  componentDidUpdate(prevPorps) {
     if (prevPorps.status !== this.props.status) {
       this.setState({
         status: this.props.status,

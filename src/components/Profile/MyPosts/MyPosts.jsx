@@ -11,9 +11,9 @@ import { Textarea } from "../../common/FormControls";
 
 const maxLength30 = maxLengthCreator(30);
 
-const PostForm = (props) => {
+const PostForm = ({ addPost }) => {
   const onSubmit = ({ newPost }) => {
-    props.addPost(newPost);
+    addPost(newPost);
   };
   return (
     <Form
@@ -37,15 +37,15 @@ const PostForm = (props) => {
   );
 };
 
-const MyPosts = (props) => {
-  const postsElements = props.postsData.map(({ post, likesCount }) => (
+const MyPosts = ({ postsData, addPost }) => {
+  const postsElements = postsData.map(({ post, likesCount }) => (
     <Post message={post} likesCount={likesCount} />
   ));
 
   return (
     <div className="posts">
       <h3>My posts</h3>
-      <PostForm addPost={props.addPost} />
+      <PostForm addPost={addPost} />
       <div className={style.posts}>{postsElements}</div>
     </div>
   );

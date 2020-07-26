@@ -9,9 +9,9 @@ import { Textarea } from "../common/FormControls";
 
 const maxLength100 = maxLengthCreator(100);
 
-export default (props) => {
+export default ({ addNewMessage }) => {
   const onSubmit = ({ newMessage }) => {
-    props.addNewMessage(newMessage);
+    addNewMessage(newMessage);
   };
   return (
     <Form

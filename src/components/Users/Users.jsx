@@ -2,26 +2,17 @@ import React from "react";
 import avaDefault from "../../assets/images/avaDefault.jpg";
 import styles from "./Users.module.css";
 import { NavLink } from "react-router-dom";
+import Paginator from "../../utils/validators/paginator/Paginator";
 
 const Users = (props) => {
-  // const pagesCount = Math.ceil(props.totalUsersCount / props.pageSize); - TOO LONG LIST
-  const pages = [];
-  for (let i = 1; i <= 10; i += 1) {
-    pages.push(i);
-  }
-
   return (
     <div>
-      <div>
-        {pages.map((p) => (
-          <span
-            onClick={() => props.onPageChanged(p)}
-            className={p === props.currentPage && styles.selectedPage}
-          >
-            {p}
-          </span>
-        ))}
-      </div>
+      <Paginator
+        totalUsersCount={props.totalUsersCount}
+        pageSize={props.pageSize}
+        onPageChanged={props.onPageChanged}
+        currentPage={props.currentPage}
+      />
       {props.users.map((u) => {
         return (
           <div key={u.id}>
