@@ -4,7 +4,7 @@ import style from "./ProfileInfo.module.css";
 export default class ProfileStatus extends React.Component {
   state = {
     editMode: false,
-    status: this.props.state,
+    status: this.props.status,
   };
   activateEditMode = () => {
     this.setState({ editMode: true });
@@ -19,9 +19,9 @@ export default class ProfileStatus extends React.Component {
     });
   };
   componentDidUpdate(prevPorps) {
-    if (prevPorps.status !== this.props.status) {
+    if (prevPorps.status !== this.state.status) {
       this.setState({
-        status: this.props.status,
+        status: this.state.status,
       });
     }
   }
@@ -30,7 +30,7 @@ export default class ProfileStatus extends React.Component {
     return (
       <div>
         {!this.state.editMode ? (
-          <span onDoubleClick={this.activateEditMode}>{this.props.status}</span>
+          <span onDoubleClick={this.activateEditMode}>{this.state.status}</span>
         ) : (
           <input
             onChange={this.onStatusChange}
