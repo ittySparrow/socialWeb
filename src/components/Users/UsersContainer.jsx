@@ -18,6 +18,7 @@ import {
   getIsFetching,
   getFollowingInProgress,
 } from "../../redux/usersSelectors";
+import Paginator from "../../utils/paginator/Paginator";
 
 class UsersContainer extends React.Component {
   componentDidMount() {
@@ -32,15 +33,17 @@ class UsersContainer extends React.Component {
   render() {
     return (
       <>
+        <Paginator
+          totalItemsCount={this.props.totalUsersCount}
+          pageSize={this.props.pageSize}
+          onPageChanged={this.onPageChanged}
+          currentPage={this.props.currentPage}
+        />
         {this.props.isFetching ? (
           <Preloader />
         ) : (
           <Users
-            totalUsersCount={this.props.totalUsersCount}
-            pageSize={this.props.pageSize}
-            currentPage={this.props.currentPage}
             users={this.props.users}
-            onPageChanged={this.onPageChanged}
             followingInProgress={this.props.followingInProgress}
             unfollowUser={this.props.unfollowUser}
             followUser={this.props.followUser}

@@ -2,17 +2,10 @@ import React from "react";
 import avaDefault from "../../assets/images/avaDefault.jpg";
 import styles from "./Users.module.css";
 import { NavLink } from "react-router-dom";
-import Paginator from "../../utils/validators/paginator/Paginator";
 
 const Users = (props) => {
   return (
     <div>
-      <Paginator
-        totalUsersCount={props.totalUsersCount}
-        pageSize={props.pageSize}
-        onPageChanged={props.onPageChanged}
-        currentPage={props.currentPage}
-      />
       {props.users.map((u) => {
         return (
           <div key={u.id}>
