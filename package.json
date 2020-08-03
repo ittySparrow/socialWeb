@@ -2,7 +2,7 @@
   "name": "littlespar",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://ittysparrow.github.io/socialWeb/",
+  "homepage": "https://ittysparrow.github.io/socialWeb",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",

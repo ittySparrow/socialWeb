@@ -18,8 +18,8 @@ export default class ProfileStatus extends React.Component {
       status: e.target.value,
     });
   };
-  componentDidUpdate(prevPorps) {
-    if (prevPorps.status !== this.state.status) {
+  componentDidUpdate(prevProrps) {
+    if (prevProrps.status !== this.state.status) {
       this.setState({
         status: this.state.status,
       });
