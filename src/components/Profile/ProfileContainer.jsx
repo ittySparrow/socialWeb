@@ -40,7 +40,7 @@ class ProfileContainer extends React.Component {
           isOwner={!this.props.match.params.userId}
           profile={this.props.profile}
           status={this.props.status}
-          updateStatus={updateStatus}
+          updateStatus={this.props.updateStatus}
           savePhoto={this.props.savePhoto}
         />
         <MyPostsContainer />
