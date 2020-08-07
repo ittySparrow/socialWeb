@@ -3,6 +3,7 @@ import style from "./ProfileInfo.module.css";
 import Preloader from "../../common/Preloader";
 import { ProfileStatusWithHooks } from "./ProfileStatusWithHooks";
 import avaDefault from "../../../assets/images/avaDefault.jpg";
+import ProfileData from "./ProfileData";
 
 const ProfileInfo = ({ profile, status, updateStatus, isOwner, savePhoto }) => {
   if (!profile) {
@@ -20,6 +21,7 @@ const ProfileInfo = ({ profile, status, updateStatus, isOwner, savePhoto }) => {
       {isOwner && <input type={"file"} onChange={onMainPhotoSelected} />}
       <ProfileStatusWithHooks status={status} updateStatus={updateStatus} />
       <div>ava+description</div>
+      <ProfileData profile={profile}/>
     </div>
   );
 };
