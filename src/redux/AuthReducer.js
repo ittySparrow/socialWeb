@@ -17,8 +17,11 @@ export const login = (email, password, rememberMe) => async (dispatch) => {
   const data = await authAPI.login(email, password, rememberMe);
   if (data.resultCode === 0) {
     dispatch(getAuthUserData());
+  } else {
+    throw data.messages[0];
   }
 };
+
 export const logout = () => async (dispatch) => {
   const response = await authAPI.logout();
   if (response.data.resultCode === 0) {

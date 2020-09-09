@@ -5,10 +5,15 @@ import {
   composeValidators,
   requieredField,
 } from "../../utils/validators/validators";
+import { FORM_ERROR } from "final-form";
 
 export const LoginForm = ({ login }) => {
-  const onSubmit = ({ email, password, rememberMe }) => {
-    login(email, password, rememberMe);
+  const onSubmit = async ({ email, password, rememberMe }) => {
+    try {
+      await login(email, password, rememberMe);
+    } catch (error) {
+      return { [FORM_ERROR]: error };
+    }
   };
 
   return (
