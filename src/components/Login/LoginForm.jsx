@@ -7,10 +7,10 @@ import {
 } from "../../utils/validators/validators";
 import { FORM_ERROR } from "final-form";
 
-export const LoginForm = ({ login }) => {
-  const onSubmit = async ({ email, password, rememberMe }) => {
+export const LoginForm = ({ login, captchaUrl }) => {
+  const onSubmit = async ({ email, password, rememberMe, captcha = null }) => {
     try {
-      await login(email, password, rememberMe);
+      await login(email, password, rememberMe, captcha);
     } catch (error) {
       return { [FORM_ERROR]: error };
     }
@@ -43,6 +43,15 @@ export const LoginForm = ({ login }) => {
             <Field component={Input} name="rememberMe" type="checkbox" />
             remember me
           </div>
+          {captchaUrl && <img src={captchaUrl} alt={"captcha"}></img>}
+          {captchaUrl && <div>          
+            <Field
+              component={Input}
+              name="captcha"
+              placeholder="Type symbols from the picture above"
+              validate={composeValidators(requieredField)}
+            />
+          </div>}
           <div>
             <button>Login</button>
           </div>
