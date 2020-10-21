@@ -4,7 +4,7 @@ import {
   composeValidators,
   requieredField,
   maxLengthCreator,
-} from "../../utils/validators/validators";
+} from "../../utils/validators/validators.ts";
 import { Textarea } from "../common/FormControls";
 
 const maxLength100 = maxLengthCreator(100);

@@ -1,9 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import {
-  toggleFollow,
   setCurrentPage,
-  toggleFollowingInProgress,
   requestUsers,
   unfollowUser,
   followUser,
@@ -19,13 +17,37 @@ import {
   getFollowingInProgress,
 } from "../../redux/usersSelectors";
 import Paginator from "../../utils/paginator/Paginator";
+import { UsersType } from "../../types/types";
+import { AppStateType } from "../../redux/reduxStore";
 
-class UsersContainer extends React.Component {
+type MapPropsType = {
+  users: Array<UsersType>
+  pageSize: number
+  totalUsersCount: number
+  currentPage: number
+  isFetching: boolean
+  followingInProgress: Array<number> // array of users' id
+}
+
+type DispatchPropsType = {
+  unfollowUser: (id: number) => void
+  followUser: (id: number) => void
+  requestUsers: (currentPage: number, pageSize: number) => void
+  setCurrentPage: (pageNumber: number) => void
+}
+
+type OwnPropsType = {
+
+}
+
+type PropsType = MapPropsType & DispatchPropsType & OwnPropsType;
+
+class UsersContainer extends React.Component<PropsType> {
   componentDidMount() {
     this.props.requestUsers(this.props.currentPage, this.props.pageSize);
   }
 
-  onPageChanged = (pageNumber) => {
+  onPageChanged = (pageNumber: number) => {
     this.props.setCurrentPage(pageNumber);
     this.props.requestUsers(pageNumber, this.props.pageSize);
   };
@@ -54,7 +76,7 @@ class UsersContainer extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: AppStateType): MapPropsType => {
   return {
     users: getUsers(state),
     pageSize: getPageSize(state),
@@ -66,12 +88,10 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-  toggleFollow,
   followUser,
   unfollowUser,
   setCurrentPage,
-  toggleFollowingInProgress,
   requestUsers,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer);
+export default connect<MapPropsType, DispatchPropsType, OwnPropsType, AppStateType>(mapStateToProps, mapDispatchToProps)(UsersContainer);

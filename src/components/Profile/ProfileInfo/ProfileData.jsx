@@ -5,7 +5,7 @@ import { Form, Field } from "react-final-form";
 import {
   requieredField,
   composeValidators,
-} from "../../../utils/validators/validators";
+} from "../../../utils/validators/validators.ts";
 import { Input, Textarea } from "../../common/FormControls";
 
 export const ProfileData = (props) => {

@@ -4,7 +4,7 @@ import { Input } from "../common/FormControls";
 import {
   composeValidators,
   requieredField,
-} from "../../utils/validators/validators";
+} from "../../utils/validators/validators.ts";
 import { FORM_ERROR } from "final-form";
 
 export const LoginForm = ({ login, captchaUrl }) => {
@@ -44,14 +44,16 @@ export const LoginForm = ({ login, captchaUrl }) => {
             remember me
           </div>
           {captchaUrl && <img src={captchaUrl} alt={"captcha"}></img>}
-          {captchaUrl && <div>          
-            <Field
-              component={Input}
-              name="captcha"
-              placeholder="Type symbols from the picture above"
-              validate={composeValidators(requieredField)}
-            />
-          </div>}
+          {captchaUrl && (
+            <div>
+              <Field
+                component={Input}
+                name="captcha"
+                placeholder="Type symbols from the picture above"
+                validate={composeValidators(requieredField)}
+              />
+            </div>
+          )}
           <div>
             <button>Login</button>
           </div>

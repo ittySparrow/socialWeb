@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import style from "./MyPosts.module.css";
 import Post from "./Post/Post";
 import { Form, Field } from "react-final-form";
@@ -8,10 +8,22 @@ import {
   maxLengthCreator,
 } from "../../../utils/validators/validators";
 import { Textarea } from "../../common/FormControls";
+import { PostType } from "../../../types/types";
 
 const maxLength30 = maxLengthCreator(30);
 
-const PostForm = ({ addPost }) => {
+type PropsType = {
+  postsData: Array<PostType>
+  addPost: (newPost: string) => void
+  postData: () => void
+}
+
+type FormPropsType = {
+  addPost: (newPost: string) => void
+
+}
+
+const PostForm: FC<FormPropsType>  = ({ addPost }) => {
   const onSubmit = ({ newPost }) => {
     addPost(newPost);
   };
@@ -37,7 +49,7 @@ const PostForm = ({ addPost }) => {
   );
 };
 
-const MyPosts = ({ postsData, addPost }) => {
+const MyPosts: FC<PropsType> = ({ postsData, addPost }) => {
   const postsElements = postsData.map(({ post, likesCount }) => (
     <Post message={post} likesCount={likesCount} />
   ));

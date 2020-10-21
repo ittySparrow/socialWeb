@@ -1,12 +1,20 @@
-import React from "react";
+import React, { FC } from "react";
 import avaDefault from "../../assets/images/avaDefault.jpg";
 import styles from "./Users.module.css";
 import { NavLink } from "react-router-dom";
+import { UsersType } from "../../types/types";
 
-const Users = (props) => {
+type PropsType = {
+  users: Array<UsersType>
+  followingInProgress: Array<number> // array of users' id
+  unfollowUser: (id: number) => void
+  followUser: (id: number) => void
+}
+
+const Users: FC<PropsType> = ({ users, followingInProgress, unfollowUser, followUser }) => {
   return (
     <div>
-      {props.users.map((u) => {
+      {users.map((u) => {
         return (
           <div key={u.id}>
             <span>
@@ -18,11 +26,11 @@ const Users = (props) => {
               </div>
               <div>
                 <button
-                  disabled={props.followingInProgress.some((id) => id === u.id)}
+                  disabled={followingInProgress.some((id) => id === u.id)}
                   onClick={() =>
                     u.followed
-                      ? props.unfollowUser(u.id)
-                      : props.followUser(u.id)
+                      ? unfollowUser(u.id)
+                      : followUser(u.id)
                   }
                 >
                   {u.followed ? "Unfollow" : "Follow"}

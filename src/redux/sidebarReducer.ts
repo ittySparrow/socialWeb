@@ -1,19 +1,11 @@
-type FriendListType = {
-    id: number
-    imgUrl: string
-    name: string
-}
+import { UsersType } from "../types/types";
 
 export type InitialStateType = {
-    friendList: Array<FriendListType>
+    friendList: Array<UsersType>
 }
 
-const initialState = {
-    friendList: [
-    //     {id: 1, imgUrl: '', name: 'Sergei'},
-    //     {id: 2, imgUrl: '', name: 'Andrei'},
-    //     {id: 1, imgUrl: '', name: 'Darja'},
-    ],
+const initialState: InitialStateType = {
+    friendList: [],
 };
 
 const sidebarReducer = (state = initialState, action: any): InitialStateType => {
