@@ -1,5 +1,5 @@
 import { ThunkAction } from "redux-thunk";
-import { authAPI, securityAPI } from "../api/API";
+import { authAPI, securityAPI, ResultCodeEnum, CaptchaIsRequiredEnum } from "../api/API";
 import { AppStateType } from "./reduxStore";
 
 const SET_AUTH_USER_DATA = "authReducer/SET_AUTH_USER_DATA";
@@ -69,10 +69,10 @@ export const login = (email: string, password: string, rememberMe: boolean, capt
   dispatch
 ) => {
   const data = await authAPI.login(email, password, rememberMe, captcha);
-  if (data.resultCode === 0) {
+  if (data.resultCode === ResultCodeEnum.Success) {
     dispatch(getAuthUserData());
   } else {
-    if (data.resultCode === 10) {
+    if (data.resultCode === CaptchaIsRequiredEnum.CaptchaIsRequired) {
       dispatch(getCaptchaUrl());
     }
     throw data.messages[0];

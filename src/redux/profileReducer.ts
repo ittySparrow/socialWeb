@@ -1,6 +1,6 @@
 import { ThunkAction } from "redux-thunk";
 import { isConstructorDeclaration } from "typescript";
-import { profileAPI } from "../api/API";
+import { profileAPI, ResultCodeEnum } from "../api/API";
 import { PhotosType, PostType, ProfileType } from "../types/types";
 import { AppStateType } from "./reduxStore";
 
@@ -112,10 +112,10 @@ export const updateStatus = (status: string): ThunkType => async (dispatch) => {
     dispatch(setStatus(status));
   }
 };
-export const savePhoto = (file: any): ThunkType => async (dispatch) => {
-  const response = await profileAPI.savePhoto(file);
-  if (response.data.resultCode === 0) {
-    dispatch(savePhotoSuccess(response.data.data.photos));
+export const savePhoto = (file: File): ThunkType => async (dispatch) => {
+  const { resultCode, data } = await profileAPI.savePhoto(file);
+  if (resultCode === ResultCodeEnum.Success) {
+    dispatch(savePhotoSuccess(data));
   }
 };
 export const saveProfile = (profile: ProfileType): ThunkType => async (dispatch, getState: () => AppStateType) => {
