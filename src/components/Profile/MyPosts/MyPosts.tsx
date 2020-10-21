@@ -24,8 +24,8 @@ type FormPropsType = {
 }
 
 const PostForm: FC<FormPropsType>  = ({ addPost }) => {
-  const onSubmit = ({ newPost }) => {
-    addPost(newPost);
+  const onSubmit = (data: any) => {
+    addPost(data.newPost);
   };
   return (
     <Form
