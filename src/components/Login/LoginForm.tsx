@@ -1,14 +1,26 @@
-import React from "react";
+import React, { FC } from "react";
 import { Form, Field } from "react-final-form";
 import { Input } from "../common/FormControls";
 import {
   composeValidators,
   requieredField,
-} from "../../utils/validators/validators.ts";
+} from "../../utils/validators/validators";
 import { FORM_ERROR } from "final-form";
 
-export const LoginForm = ({ login, captchaUrl }) => {
-  const onSubmit = async ({ email, password, rememberMe, captcha = null }) => {
+type FormPropsType = {
+  login: (email: string, password: string, rememberMe: boolean, captcha: string | null) => void
+  captchaUrl: string | null
+}
+
+type SubmitType = {
+  email: string
+  password: string
+  rememberMe: boolean
+  captcha: string | null
+}
+
+export const LoginForm: FC<FormPropsType> = ({ login, captchaUrl }) => {
+  const onSubmit = async ({ email, password, rememberMe, captcha = null }: SubmitType) => {
     try {
       await login(email, password, rememberMe, captcha);
     } catch (error) {

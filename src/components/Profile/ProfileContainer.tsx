@@ -12,8 +12,10 @@ import withAuthRedirect from "../HOC/withAuthRedirect";
 import { compose } from "redux";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
+import { ProfileType } from "../../types/types";
+import { AppStateType } from "../../redux/reduxStore";
 
-class ProfileContainer extends React.Component {
+class ProfileContainer extends React.Component<MapStatePropsType & DispatchPropsType & any> {
   updateProfile() {
     let userId = this.props.match.params.userId;
     if (!userId) {
@@ -28,7 +30,7 @@ class ProfileContainer extends React.Component {
   componentDidMount() {
     this.updateProfile();
   }
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: any) {
     if (this.props.match.params.userId !== prevProps.match.params.userId) {
       this.updateProfile();
     }
@@ -51,7 +53,22 @@ class ProfileContainer extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
+type MapStatePropsType = {
+  status: string
+  profile: ProfileType | null
+  isAuth: boolean
+  authUserId: number | null
+}
+
+type DispatchPropsType = {
+  setProfile: (userId: number) => void
+  getStatus: (userId: number) => void
+  updateStatus: (status: string) => void
+  savePhoto: (file: File) => void
+  saveProfile: (profile: ProfileType) => void
+}
+
+const mapStateToProps = (state: AppStateType): MapStatePropsType => ({
   status: state.profilePage.status,
   profile: state.profilePage.profile,
   isAuth: state.auth.isAuth,
@@ -60,7 +77,7 @@ const mapStateToProps = (state) => ({
 
 export default compose(
   withRouter,
-  connect(mapStateToProps, {
+  connect<MapStatePropsType, DispatchPropsType, {}, AppStateType>(mapStateToProps, {
     setProfile,
     getStatus,
     updateStatus,

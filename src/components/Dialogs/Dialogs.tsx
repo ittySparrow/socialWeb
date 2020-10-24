@@ -1,10 +1,17 @@
-import React from "react";
+import React, { FC } from "react";
 import style from "./Dialogs.module.css";
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import AddMessageForm from "./AddMessageForm";
+import { DialogsType, MessagesType } from "../../types/types";
 
-export default ({ dialogsData, messagesData, addNewMessage }) => {
+type PropsType = {
+  dialogsData: Array<DialogsType>
+  messagesData: Array<MessagesType>
+  addNewMessage: (message: string) => void
+}
+
+ const Dialogs: FC<PropsType> = ({ dialogsData, messagesData, addNewMessage }) => {
   const dialogElements = dialogsData.map(({ id, name }) => (
     <DialogItem name={name} id={id} />
   ));
@@ -22,4 +29,6 @@ export default ({ dialogsData, messagesData, addNewMessage }) => {
       </div>
     </div>
   );
-};
+ };
+
+export default Dialogs;

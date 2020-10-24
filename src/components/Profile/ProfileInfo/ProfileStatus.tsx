@@ -1,7 +1,12 @@
-import React from "react";
+import React, { ChangeEvent } from "react";
 import style from "./ProfileInfo.module.css";
 
-export default class ProfileStatus extends React.Component {
+type PropsType = {
+  status: string
+  updateStatus: (status: string) => void
+}
+
+export default class ProfileStatus extends React.Component<PropsType> {
   state = {
     editMode: false,
     status: this.props.status,
@@ -13,12 +18,12 @@ export default class ProfileStatus extends React.Component {
     this.setState({ editMode: false });
     this.props.updateStatus(this.state.status);
   };
-  onStatusChange = (e) => {
+  onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
     this.setState({
       status: e.target.value,
     });
   };
-  componentDidUpdate(prevProrps) {
+  componentDidUpdate(prevProrps: PropsType) {
     if (prevProrps.status !== this.state.status) {
       this.setState({
         status: this.state.status,

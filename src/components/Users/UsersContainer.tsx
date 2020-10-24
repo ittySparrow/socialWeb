@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import {
-  setCurrentPage,
+  actions,
   requestUsers,
   unfollowUser,
   followUser,
@@ -90,7 +90,7 @@ const mapStateToProps = (state: AppStateType): MapPropsType => {
 const mapDispatchToProps = {
   followUser,
   unfollowUser,
-  setCurrentPage,
+  setCurrentPage: actions.setCurrentPage,
   requestUsers,
 };
 

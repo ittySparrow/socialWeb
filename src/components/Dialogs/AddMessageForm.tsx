@@ -1,16 +1,23 @@
-import React from "react";
+import React, { FC } from "react";
 import { Form, Field } from "react-final-form";
 import {
   composeValidators,
   requieredField,
   maxLengthCreator,
-} from "../../utils/validators/validators.ts";
+} from "../../utils/validators/validators";
 import { Textarea } from "../common/FormControls";
 
 const maxLength100 = maxLengthCreator(100);
 
-export default ({ addNewMessage }) => {
-  const onSubmit = ({ newMessage }) => {
+type FormPropsType = {
+  addNewMessage: (newMessage: string) => void
+}
+type SubmitValueType = {
+  newMessage: string
+}
+
+const AddMessageForm: FC<FormPropsType>  = ({ addNewMessage }) => {
+  const onSubmit = ({ newMessage }: SubmitValueType) => {
     addNewMessage(newMessage);
   };
   return (
@@ -34,3 +41,5 @@ export default ({ addNewMessage }) => {
     />
   );
 };
+
+export default AddMessageForm;

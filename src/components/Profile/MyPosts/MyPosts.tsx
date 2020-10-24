@@ -11,21 +11,19 @@ import { Textarea } from "../../common/FormControls";
 import { PostType } from "../../../types/types";
 
 const maxLength30 = maxLengthCreator(30);
-
 type PropsType = {
   postsData: Array<PostType>
   addPost: (newPost: string) => void
-  postData: () => void
 }
-
 type FormPropsType = {
   addPost: (newPost: string) => void
-
 }
-
+type SubmitFormType = {
+  newPost: string
+}
 const PostForm: FC<FormPropsType>  = ({ addPost }) => {
-  const onSubmit = (data: any) => {
-    addPost(data.newPost);
+  const onSubmit = ({ newPost }: SubmitFormType) => {
+    addPost(newPost);
   };
   return (
     <Form
@@ -48,7 +46,6 @@ const PostForm: FC<FormPropsType>  = ({ addPost }) => {
     />
   );
 };
-
 const MyPosts: FC<PropsType> = ({ postsData, addPost }) => {
   const postsElements = postsData.map(({ post, likesCount }) => (
     <Post message={post} likesCount={likesCount} />

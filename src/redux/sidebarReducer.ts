@@ -1,11 +1,9 @@
 import { UsersType } from "../types/types";
 
-export type InitialStateType = {
-    friendList: Array<UsersType>
-}
+export type InitialStateType = typeof initialState;
 
-const initialState: InitialStateType = {
-    friendList: [],
+const initialState = {
+    friendList: [] as Array<UsersType>,
 };
 
 const sidebarReducer = (state = initialState, action: any): InitialStateType => {

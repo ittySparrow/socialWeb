@@ -3,7 +3,7 @@ import style from "./Post.module.css";
 
 type PropsType = {
   message: string
-likesCount: number
+  likesCount: number
 }
 
 const Post: FC<PropsType> = ({ message, likesCount }) => {

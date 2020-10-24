@@ -1,12 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, FC, FormEvent, ChangeEvent } from "react";
 import style from "./ProfileInfo.module.css";
 import Preloader from "../../common/Preloader";
 import { ProfileStatusWithHooks } from "./ProfileStatusWithHooks";
 import avaDefault from "../../../assets/images/avaDefault.jpg";
 import { ProfileData, ProfileDataForm } from "./ProfileData";
 import { FORM_ERROR } from "final-form";
+import { ProfileType } from "../../../types/types";
 
-const ProfileInfo = ({
+type ProfileInfoProps = {
+  profile: ProfileType
+  status: string
+  updateStatus: () => void
+  isOwner: boolean
+  savePhoto: (file: File) => void
+  saveProfile: (profile: ProfileType) => void
+}
+
+const ProfileInfo: FC<ProfileInfoProps> = ({
   profile,
   status,
   updateStatus,
@@ -19,13 +29,14 @@ const ProfileInfo = ({
   if (!profile) {
     return <Preloader />;
   }
-  const onMainPhotoSelected = (e) => {
-    if (e.target.files.length) {
-      savePhoto(e.target.files[0]);
+  const onMainPhotoSelected = (e: ChangeEvent<HTMLInputElement>) => {
+    const fileList = (e.target as HTMLInputElement).files;
+    if (fileList && fileList.length) {
+      savePhoto(fileList[0]);
     }
   };
 
-  const onSubmit = async (formData) => {
+  const onSubmit = async (formData: ProfileType) => {
     try {
       await saveProfile(formData);
     } catch (error) {

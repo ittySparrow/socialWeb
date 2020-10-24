@@ -5,10 +5,17 @@ import { Form, Field } from "react-final-form";
 import {
   requieredField,
   composeValidators,
-} from "../../../utils/validators/validators.ts";
+} from "../../../utils/validators/validators";
 import { Input, Textarea } from "../../common/FormControls";
+import { ProfileType, ContactsType } from "../../../types/types";
 
-export const ProfileData = (props) => {
+type PropsType = {
+  profile: ProfileType
+  isOwner: boolean
+  activateEditMode: (value: React.SetStateAction<boolean>) => void
+}
+
+export const ProfileData = (props: PropsType) => {
   let [profile, setProfile] = useState(props.profile);
 
   useEffect(() => {
@@ -19,16 +26,15 @@ export const ProfileData = (props) => {
     return <Preloader />;
   }
 
-  const contacts = Object.keys(profile.contacts)
-    .map((key) =>
-      profile.contacts[key] ? `${key}: ${profile.contacts[key]}` : null
+  const contacts = Object.keys(profile.contacts).map((key) =>
+      profile.contacts[key as keyof ContactsType] ? `${key}: ${profile.contacts[key as keyof ContactsType]}` : null
     )
     .filter((c) => !!c);
-
+  
   return (
     <div>
       {props.isOwner && (
-        <button onClick={props.activateEditMode}>Редактировать профиль</button>
+        <button onClick={() => props.activateEditMode}>Редактировать профиль</button>
       )}
       <div className="fullName">Full Name: {profile.fullName}</div>
       <div className="job-searching">
@@ -37,7 +43,9 @@ export const ProfileData = (props) => {
       <div className="jobDescription">
         Job Description: {profile.lookingForAJobDescription}
       </div>
-      <div className="aboutMe">About Me: {profile.aboutMe}</div>
+      <div className="aboutMe">
+        About Me: {profile.aboutMe}
+      </div>
       {contacts.length > 0 ? (
         <div className="contacts">
           {contacts.map((contact) => (
@@ -51,7 +59,13 @@ export const ProfileData = (props) => {
   );
 };
 
-export const ProfileDataForm = ({ profile, saveProfile }) => {
+type ProfileDataFormProps = {
+  profile: ProfileType
+  saveProfile: (profile: ProfileType) => Promise<{ "FINAL_FORM/form-error": any; } | undefined>
+  activateEditMode: (value: React.SetStateAction<boolean>) => void
+}
+
+export const ProfileDataForm = ({ profile, saveProfile }: ProfileDataFormProps) => {
   return (
     <Form
       initialValues={profile}
@@ -79,7 +93,12 @@ export const ProfileDataForm = ({ profile, saveProfile }) => {
             />
           </div>
           <div className="aboutMe">
-            About Me: <Field component={Textarea} name="aboutMe" />
+            About me:{" "}
+            <Field
+              component={Textarea}
+              name="aboutMe"
+              validate={composeValidators(requieredField)}
+            />
           </div>
           <div className="contacts">
             Contacts:

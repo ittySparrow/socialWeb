@@ -1,7 +1,10 @@
-import React from "react";
+import React, { FC, ReactElement, ReactNode } from "react";
+import { FieldRenderProps } from "react-final-form";
 import styles from "./FormControls.module.css";
 
-const FormControl = (TagName) => ({ input, meta, ...props }) => {
+
+//////////////////////////////////////////
+const FormControl = (TagName: any): FC<FieldRenderProps<string, HTMLElement>> => ({ input, meta, ...props }) => {
   const hasError = meta.touched && meta.error;
   return (
     <div className={styles.formControl + " " + (hasError ? styles.error : "")}>
