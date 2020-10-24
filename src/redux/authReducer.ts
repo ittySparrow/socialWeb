@@ -1,8 +1,7 @@
-import { ThunkAction } from "redux-thunk";
 import { ResultCodeEnum, CaptchaIsRequiredEnum } from "../api/API";
 import { authAPI } from "../api/authAPI";
 import { securityAPI } from "../api/securityAPI";
-import { AppStateType, BaseThunkType, InferActionType } from "./reduxStore";
+import { BaseThunkType, InferActionType } from "./reduxStore";
 
 const SET_AUTH_USER_DATA = "authReducer/SET_AUTH_USER_DATA";
 const GET_CAPTCHA_URL_SUCCESS = "authReducer/GET_CAPTCHA_URL_SUCCESS";
@@ -14,8 +13,6 @@ const initialState = {
   isAuth: false,
   captchaUrl: null as string | null,
 };
-
-export type InitialStateType = typeof initialState;
 
 const authReducer = (state = initialState, action: ActionsType): InitialStateType => {
   switch (action.type) {
@@ -29,12 +26,8 @@ const authReducer = (state = initialState, action: ActionsType): InitialStateTyp
       return state;
   }
 };
-
 export default authReducer;
 
-type ActionsType = InferActionType<typeof actions>
-type ThunkType = BaseThunkType<ActionsType>
-  
 export const actions = {
   setAuthUserData: (id: number | null, login: string | null, email: string | null, isAuth: boolean) => ({
     type: SET_AUTH_USER_DATA,
@@ -75,3 +68,7 @@ export const logout = (): ThunkType => async (dispatch) => {
     dispatch(actions.setAuthUserData(null, null, null, false));
   }
 };
+
+export type InitialStateType = typeof initialState;
+type ActionsType = InferActionType<typeof actions>
+type ThunkType = BaseThunkType<ActionsType>

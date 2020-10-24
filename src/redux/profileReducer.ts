@@ -1,4 +1,3 @@
-import { ThunkAction } from "redux-thunk";
 import { ResultCodeEnum } from "../api/API";
 import profileAPI from "../api/profileAPI";
 import { PhotosType, PostType, ProfileType } from "../types/types";
@@ -18,8 +17,6 @@ const initialState = {
   profile: null as ProfileType | null,
   status: "",
 };
-
-export type InitialStateType = typeof initialState;
 
 const profileReducer = (state = initialState, action: ActionsType): InitialStateType => {
   switch (action.type) {
@@ -57,11 +54,8 @@ const profileReducer = (state = initialState, action: ActionsType): InitialState
       return state;
   }
 };
-
 export default profileReducer;
 
-type ActionsType = InferActionType<typeof actions>
-type ThunkType = BaseThunkType<ActionsType>
 
 export const actions = {
   addPost: (text: string) => ({ type: ADD_POST, text } as const),
@@ -111,3 +105,7 @@ export const saveProfile = (profile: ProfileType): ThunkType => async (dispatch,
     dispatch(setProfile(userId));
   }
 };
+
+export type InitialStateType = typeof initialState;
+type ActionsType = InferActionType<typeof actions>
+type ThunkType = BaseThunkType<ActionsType>
