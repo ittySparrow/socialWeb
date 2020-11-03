@@ -13,9 +13,6 @@ type MapStatePropsType = {
 type DispatchPropsType = {
   login: (email: string, password: string, rememberMe: boolean, captcha: string | null) => void
 }
-type OwnPropsType = {
-
-}
 
 const Login: FC<PropsType> = (props) => {
   if (props.isAuth) {

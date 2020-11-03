@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+// import React from "react";
 import { connect } from "react-redux";
 import { actions } from "../../../redux/profileReducer";
 import { AppStateType } from "../../../redux/reduxStore";

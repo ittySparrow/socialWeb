@@ -5,14 +5,14 @@ import ProfileStatus from "./ProfileStatus";
 describe("ProfileStatus component", () => {
   test("status from props should be in the state", () => {
     const component = TestRenderer.create(
-      <ProfileStatus status="it-kamasutra.com" />
+      <ProfileStatus status="it-kamasutra.com" updateStatus={jest.fn()}/>
     );
     const instance = component.getInstance();
     expect(instance.state.status).toBe("it-kamasutra.com");
   });
   test("after creation span should be displayed", () => {
     const component = TestRenderer.create(
-      <ProfileStatus status="it-kamasutra.com" />
+      <ProfileStatus status="it-kamasutra.com" updateStatus={jest.fn()}/>
     );
     const instance = component.root;
     const span = instance.findByType("span");
@@ -20,7 +20,7 @@ describe("ProfileStatus component", () => {
   });
   test("after creation input shouldn't be displayed", () => {
     const component = TestRenderer.create(
-      <ProfileStatus status="it-kamasutra.com" />
+      <ProfileStatus status="it-kamasutra.com" updateStatus={jest.fn()}/>
     );
     const instance = component.root;
     expect(() => {
@@ -29,7 +29,7 @@ describe("ProfileStatus component", () => {
   });
   test("after creation span should show correct text from props", () => {
     const component = TestRenderer.create(
-      <ProfileStatus status="it-kamasutra.com" />
+      <ProfileStatus status="it-kamasutra.com" updateStatus={jest.fn()}/>
     );
     const instance = component.root;
     const span = instance.findByType("span");
@@ -37,7 +37,7 @@ describe("ProfileStatus component", () => {
   });
   test("input should be displayed in EditMode instead of span", () => {
     const component = TestRenderer.create(
-      <ProfileStatus status="it-kamasutra.com" />
+      <ProfileStatus status="it-kamasutra.com" updateStatus={jest.fn()}/>
     );
     const instance = component.root;
     const span = instance.findByType("span");

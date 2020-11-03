@@ -1,4 +1,4 @@
-import React from "react";
+import { ComponentType } from "react";
 import { actions } from "../../redux/dialogsReducer";
 import Dialogs from "./Dialogs";
 import { connect } from "react-redux";
@@ -19,7 +19,7 @@ const mapStateToProps = ({ messagesPage }: AppStateType): MapStatePropsType => {
   };
 };
 
-export default compose(
+export default compose<ComponentType>(
   connect<MapStatePropsType, {}, {}, AppStateType>(mapStateToProps, { addNewMessage: actions.addNewMessage }),
   withAuthRedirect
 )(Dialogs);

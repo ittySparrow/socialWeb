@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 import NavBar from "./components/NavBar/NavBar";
 import Sidebar from "./components/Sidebar/Sidebar";
-import { Route } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 import { initializeApp } from "./redux/appReducer";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
@@ -11,15 +11,20 @@ import Login from "./components/Login/Login";
 import { connect } from "react-redux";
 import Preloader from "./components/common/Preloader";
 import { Suspense } from "react";
-import { Redirect, Switch } from "react-router-dom/cjs/react-router-dom.min";
+import { AppStateType } from "./redux/reduxStore";
+
+type AppPropsType = ReturnType<typeof mapStateToProps> & DispatchPropsType;
+type DispatchPropsType = {
+  initializeApp: () => void;
+}
 
 const UsersContainer = React.lazy(() =>
   import("./components/Users/UsersContainer")
 );
 
-class App extends React.Component {
-  handleAllUncaughtErrors = (reason, promise) => {
-    alert(reason);
+class App extends React.Component<AppPropsType> {
+  handleAllUncaughtErrors = (e: PromiseRejectionEvent) => {
+    alert(e);
   };
 
   componentDidMount() {
@@ -76,7 +81,8 @@ class App extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: AppStateType) => ({
   initialized: state.app.initialized,
 });
+
 export default connect(mapStateToProps, { initializeApp })(App);

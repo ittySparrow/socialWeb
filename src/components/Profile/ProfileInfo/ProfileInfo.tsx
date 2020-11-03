@@ -1,16 +1,15 @@
-import React, { useState, useEffect, FC, FormEvent, ChangeEvent } from "react";
-import style from "./ProfileInfo.module.css";
+import React, { useState, FC, ChangeEvent } from "react";
 import Preloader from "../../common/Preloader";
-import { ProfileStatusWithHooks } from "./ProfileStatusWithHooks";
+import ProfileStatus from "./ProfileStatus";
 import avaDefault from "../../../assets/images/avaDefault.jpg";
 import { ProfileData, ProfileDataForm } from "./ProfileData";
 import { FORM_ERROR } from "final-form";
 import { ProfileType } from "../../../types/types";
 
 type ProfileInfoProps = {
-  profile: ProfileType
+  profile: ProfileType | null
   status: string
-  updateStatus: () => void
+  updateStatus: (status: string) => void
   isOwner: boolean
   savePhoto: (file: File) => void
   saveProfile: (profile: ProfileType) => void
@@ -30,9 +29,8 @@ const ProfileInfo: FC<ProfileInfoProps> = ({
     return <Preloader />;
   }
   const onMainPhotoSelected = (e: ChangeEvent<HTMLInputElement>) => {
-    const fileList = (e.target as HTMLInputElement).files;
-    if (fileList && fileList.length) {
-      savePhoto(fileList[0]);
+    if (e.target.files?.length) {
+      savePhoto(e.target.files[0]);
     }
   };
 
@@ -49,7 +47,7 @@ const ProfileInfo: FC<ProfileInfoProps> = ({
     <div>
       <img src={profile.photos.large || avaDefault}></img>
       {isOwner && <input type={"file"} onChange={onMainPhotoSelected} />}
-      <ProfileStatusWithHooks status={status} updateStatus={updateStatus} />
+      <ProfileStatus status={status} updateStatus={updateStatus} />
       <div>ava+description</div>
       {!editMode ? (
         <ProfileData

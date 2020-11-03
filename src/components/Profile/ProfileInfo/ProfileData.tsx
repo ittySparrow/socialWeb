@@ -12,7 +12,7 @@ import { ProfileType, ContactsType } from "../../../types/types";
 type PropsType = {
   profile: ProfileType
   isOwner: boolean
-  activateEditMode: (value: React.SetStateAction<boolean>) => void
+  activateEditMode: () => void
 }
 
 export const ProfileData = (props: PropsType) => {
@@ -34,7 +34,7 @@ export const ProfileData = (props: PropsType) => {
   return (
     <div>
       {props.isOwner && (
-        <button onClick={() => props.activateEditMode}>Редактировать профиль</button>
+        <button onClick={props.activateEditMode}>Редактировать профиль</button>
       )}
       <div className="fullName">Full Name: {profile.fullName}</div>
       <div className="job-searching">
@@ -61,7 +61,7 @@ export const ProfileData = (props: PropsType) => {
 
 type ProfileDataFormProps = {
   profile: ProfileType
-  saveProfile: (profile: ProfileType) => Promise<{ "FINAL_FORM/form-error": any; } | undefined>
+  saveProfile: (profile: ProfileType) => Promise<any>
   activateEditMode: (value: React.SetStateAction<boolean>) => void
 }
 
@@ -70,7 +70,7 @@ export const ProfileDataForm = ({ profile, saveProfile }: ProfileDataFormProps) 
     <Form
       initialValues={profile}
       onSubmit={saveProfile}
-      render={({ submitError, handleSubmit }) => (
+      render={({ handleSubmit }) => (
         <form onSubmit={handleSubmit}>
           <div className="fullName">
             Full Name:{" "}

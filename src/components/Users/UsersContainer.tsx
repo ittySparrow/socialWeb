@@ -36,9 +36,7 @@ type DispatchPropsType = {
   setCurrentPage: (pageNumber: number) => void
 }
 
-type OwnPropsType = {
-
-}
+type OwnPropsType = {}
 
 type PropsType = MapPropsType & DispatchPropsType & OwnPropsType;
 
